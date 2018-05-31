@@ -1,5 +1,3 @@
-let connection = require('./connection.js')
-
 //convert object to valid SQL
 function newVals(colVals) {
 
