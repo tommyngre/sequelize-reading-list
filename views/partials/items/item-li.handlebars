@@ -1,0 +1,14 @@
+<li>
+	<div class="large-12 cell">
+		<h3 class="has-tooltip"><span class="tooltip-text">{{item_name}}</span>
+			{{#if URL}}<i class="fas fa-link"></i> <a href="{{item_name}}">{{displayName}}</a>
+			{{else}}<i class="fas fa-book"></i> {{displayName}}{{/if}}</h3>
+	</div>
+	<button class="button toggle-isComplete" data-id="{{id}}" data-iscomplete="{{is_complete}}">
+		{{#if is_complete}}add back to list{{else}}mark completed{{/if}}
+	</button>
+
+	<button class="alert button delete-item" data-id="{{this.id}}">
+		remove from list
+	</button>
+</li>
