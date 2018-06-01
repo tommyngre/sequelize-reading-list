@@ -1,6 +1,6 @@
 let express = require('express');
 
-// let item = require('../models/item.js');
+let db = require('../models/');
 
 //router and export
 var router = express.Router();
@@ -9,32 +9,17 @@ var router = express.Router();
 //GET all rows from db
 router.get("/", function (req, res) {
 
-  item.all(function (data) {
+  db.Item.findAll().then(function (data) {
 
-    data.forEach(row => {
-      let n = row.item_name;
-      let isURL = 'nope';
-
-      //HANDLING        
-      //check if a url
-      if (n.substring(0, 3) == "htt" || n.substring(0, 3) == "www") {
-        row['URL'] = true;
-      } else {
-        row['URL'] = false;
-      }
-      //check length
-      if (n.length > 20) {
-        row['displayName'] = n.substring(0, 17) + '...';
-      } else {
-        row['displayName'] = n;
-      }
-    });
-
-    let obj = {
-      items: data
+    let items = {
+      item: data
     };
 
-    res.render("index", obj);
+    // data.forEach(datum => {
+    //   console.log(datum.dataValues);
+    // })
+
+   res.render("index", items);
   });
 
 });
@@ -42,12 +27,9 @@ router.get("/", function (req, res) {
 //GET all rows => renders as JSON
 router.get("/api/list", function (req, res) {
 
-  item.all(function (data) {
-    let obj = {
-      items: data
-    };
+  db.Item.findAll().then(function (data) {
 
-    res.json(obj);
+    res.json(data);
   });
 
 });
@@ -55,7 +37,7 @@ router.get("/api/list", function (req, res) {
 //POST new row
 router.post("/api/new", function (req, res) {
 
-  item.add(
+  db.Item.add(
     [
       "item_name",
       "is_complete"
@@ -72,7 +54,7 @@ router.post("/api/new", function (req, res) {
 router.put("/api/list/:id", function (req, res) {
   let condition = "id = " + req.params.id;
 
-  item.update({
+  db.Item.update({
     is_complete: req.body.isComplete
   }, condition, function (result) {
     if (result.changedRows == 0) {
@@ -87,7 +69,7 @@ router.put("/api/list/:id", function (req, res) {
 router.delete("/api/list/:id", function (req, res) {
   var condition = "id = " + req.params.id;
 
-  item.delete(condition, function (result) {
+  db.Item.delete(condition, function (result) {
     if (result.affectedRows == 0) {
       return res.status(404).end();
     } else {

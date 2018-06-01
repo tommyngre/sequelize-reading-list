@@ -22,7 +22,7 @@
       <h1>Reading list</h1>
       <div class="grid-x grid-padding-x">
         <ul id="havent-read">
-          {{#each items}} {{#unless is_complete}} {{> items/item-li is_complete=false}} {{/unless}} {{/each}}
+          {{#each item}} {{#unless is_complete}} {{> items/item-li is_complete=false}} {{/unless}} {{/each}}
         </ul>
       </div>
     </div>
@@ -31,7 +31,7 @@
       <h1>Recent reads</h1>
       <div class="grid-x grid-padding-x">
         <ul id="have-read">
-          {{#each items}} {{#if is_complete}} {{> items/item-li iscomplete=true}} {{/if}} {{/each}}
+          {{#each item}} {{#if is_complete}} {{> items/item-li is_complete=true}} {{/if}} {{/each}}
         </ul>
       </div>
     </div>

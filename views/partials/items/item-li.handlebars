@@ -1,14 +1,15 @@
+{{!-- url needs work. not boolean anymore --}}
 <li>
 	<div class="large-12 cell">
-		<h3 class="has-tooltip"><span class="tooltip-text">{{item_name}}</span>
-			{{#if URL}}<i class="fas fa-link"></i> <a href="{{item_name}}">{{displayName}}</a>
-			{{else}}<i class="fas fa-book"></i> {{displayName}}{{/if}}</h3>
+		<h3 class="has-tooltip"><span class="tooltip-text">{{dataValues.display_name}}</span>
+			{{#if url}}<i class="fas fa-link"></i> <a href="{{url}}">{{dataValues.display_name}}</a>
+			{{else}}<i class="fas fa-book"></i> {{dataValues.display_name}}{{/if}}</h3>
 	</div>
-	<button class="button toggle-isComplete" data-id="{{id}}" data-iscomplete="{{is_complete}}">
-		{{#if is_complete}}add back to list{{else}}mark completed{{/if}}
+	<button class="button toggle-isComplete" data-id="{{dataValues.id}}" data-iscomplete="{{dataValues.is_complete}}">
+		{{#if dataValues.is_complete}}add back to list{{else}}mark completed{{/if}}
 	</button>
 
-	<button class="alert button delete-item" data-id="{{this.id}}">
+	<button class="alert button delete-item" data-id="{{dataValues.id}}">
 		remove from list
 	</button>
 </li>
