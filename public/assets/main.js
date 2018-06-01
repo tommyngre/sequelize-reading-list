@@ -42,12 +42,13 @@ $(document).on('click', '#add', function () {
   event.preventDefault();
 
   //validate entry
-  if (!validate($('#item-name').val().trim())) {
+  if (!validate($('#item_name').val().trim())) {
     return;
   }
 
   let obj = {
-    itemName: $('#item-name').val().trim(),
+    itemName: $('#item_name').val().trim(),
+    itemDescription: $('#item_description').val().trim(),
     is_complete: false
   }
 

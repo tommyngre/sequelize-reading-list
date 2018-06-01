@@ -1,10 +1,5 @@
-module.exports = function(sequelize,Datatypes){
+module.exports = function (sequelize, Datatypes) {
   let Item = sequelize.define("Item", {
-    id: {
-      type: Datatypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
     display_name: {
       type: Datatypes.STRING,
       allowNull: false,
@@ -13,7 +8,7 @@ module.exports = function(sequelize,Datatypes){
           [1, 250]
       }
     },
-    url: {
+    description: {
       type: Datatypes.STRING,
       allowNull: true,
       validate: {

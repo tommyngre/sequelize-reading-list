@@ -15,11 +15,7 @@ router.get("/", function (req, res) {
       item: data
     };
 
-    // data.forEach(datum => {
-    //   console.log(datum.dataValues);
-    // })
-
-   res.render("index", items);
+    res.render("index", items);
   });
 
 });
@@ -37,17 +33,16 @@ router.get("/api/list", function (req, res) {
 //POST new row
 router.post("/api/new", function (req, res) {
 
-  db.Item.add(
-    [
-      "item_name",
-      "is_complete"
-    ], [
-      req.body.itemName,
-      Boolean(req.body.isComplete)
-    ],
-    function (result) {
-      res.json({ id: result.insertId });
-    });
+  console.log(req.body);
+
+  db.Item.create({
+    display_name: req.body.itemName,
+    description: req.body.itemDescription,
+    is_complete: false,
+  }).then(function (result) {
+    res.json({ id: result.insertId });
+  });
+  // .catch(function(){};)
 });
 
 //PUT update row status
