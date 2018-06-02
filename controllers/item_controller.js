@@ -51,24 +51,32 @@ router.put("/api/list/:id", function (req, res) {
 
   db.Item.update({
     is_complete: req.body.isComplete
-  }, condition, function (result) {
-    if (result.changedRows == 0) {
-      res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-  });
+  }, {
+      where: {
+        id: req.params.id
+      }
+    }).then(function (result) {
+      if (result.changedRows == 0) {
+        res.status(404).end();
+      } else {
+        return res.json(result);
+      }
+    });
 });
 
 //DELETE row
 router.delete("/api/list/:id", function (req, res) {
   var condition = "id = " + req.params.id;
 
-  db.Item.delete(condition, function (result) {
+  db.Item.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (result) {
     if (result.affectedRows == 0) {
       return res.status(404).end();
     } else {
-      res.status(200).end();
+      return res.json(result);
     }
   });
 });
