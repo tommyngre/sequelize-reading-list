@@ -1,3 +1,12 @@
+// get user id from localStorage
+function checkLocalStorage(){
+  if (window.localStorage.getItem("myReadingListId") === null) {
+    return false;
+  } 
+  return window.localStorage.getItem("myReadingListId");
+}
+
+
 // if nothing in either list, display message
 function checkSectionContents() {
 

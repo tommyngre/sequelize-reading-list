@@ -56,13 +56,19 @@ router.post("/api/new", function (req, res) {
 //POST login
 router.post("/api/login", function (req, res) {
 
-  console.log(req.body);
+  console.log("req.body "+req.body);
 
-  db.User.create({
-    username: req.body.username,
-    email: req.body.email,
+  db.User.findOrCreate({
+    where: {
+      username: req.body.username,
+      email: req.body.email
+    }
   }).then(function (result) {
-    // res.json({ id: result.insertId });
+    return res.json({ 
+      id: result[0].dataValues.id,
+      username: result[0].dataValues.username,
+      email: result[0].dataValues.email,
+    });
   });
   // .catch(function(){};)
 });
