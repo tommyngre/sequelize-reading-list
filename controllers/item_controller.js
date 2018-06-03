@@ -1,18 +1,17 @@
 let express = require('express');
+var path = require('path');
 
 let db = require('../models/');
 
 //router and export
 var router = express.Router();
-var path = require('path');
 
 //ROUTES
 //GET all rows from db
-router.get("/", function (req, res) {
+router.get("/:username?/:email?", function (req, res) {
 
-  console.log(req.body);
-
-  if (typeof req.body.myReadingListUserName === 'undefined') {
+  //don't show list unless username and password supplied
+  if ((typeof req.query.username === 'undefined') || (typeof req.query.email === 'undefined')) {
     res.sendFile(path.join(__dirname, "../public/login.html"));
     return;
   };
