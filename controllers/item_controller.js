@@ -4,10 +4,19 @@ let db = require('../models/');
 
 //router and export
 var router = express.Router();
+var path = require('path');
 
 //ROUTES
 //GET all rows from db
 router.get("/", function (req, res) {
+
+  console.log(req.body);
+
+  if (typeof req.body.myReadingListUserName === 'undefined') {
+    res.sendFile(path.join(__dirname, "../public/login.html"));
+    return;
+  };
+
 
   db.Item.findAll().then(function (data) {
 
@@ -41,6 +50,20 @@ router.post("/api/new", function (req, res) {
     is_complete: false,
   }).then(function (result) {
     res.json({ id: result.insertId });
+  });
+  // .catch(function(){};)
+});
+
+//POST login
+router.post("/api/login", function (req, res) {
+
+  console.log(req.body);
+
+  db.User.create({
+    username: req.body.username,
+    email: req.body.email,
+  }).then(function (result) {
+    // res.json({ id: result.insertId });
   });
   // .catch(function(){};)
 });
