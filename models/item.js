@@ -22,5 +22,17 @@ module.exports = function (sequelize, Datatypes) {
       allowNull: false
     }
   });
+
+  Item.associate = function(models) {
+    // Items belong to Users
+    // Items can't be created without a user
+    /// because foreign key constraint
+    Item.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  }
+
   return Item;
 }

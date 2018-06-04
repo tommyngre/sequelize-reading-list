@@ -47,6 +47,7 @@ router.post("/api/new", function (req, res) {
     display_name: req.body.itemName,
     description: req.body.itemDescription,
     is_complete: false,
+    UserId: req.body.UserId
   }).then(function (result) {
     res.json({ id: result.insertId });
   });

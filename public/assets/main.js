@@ -1,8 +1,8 @@
 // get user id from localStorage
-function checkLocalStorage(){
+function getMyReadingListId() {
   if (window.localStorage.getItem("myReadingListId") === null) {
     return false;
-  } 
+  }
   return window.localStorage.getItem("myReadingListId");
 }
 
@@ -14,7 +14,7 @@ function checkSectionContents() {
     let html = `<h3 class="none-yet">None yet.</h3>`
     $('#havent-read').append(html);
   };
-  if ($('#have-read').find('li').length < 1){
+  if ($('#have-read').find('li').length < 1) {
     let html = `<h3 class="none-yet">None yet.</h3>`
     $('#have-read').append(html);
   };
@@ -50,16 +50,28 @@ function validate(entry) {
 $(document).on('click', '#add', function () {
   event.preventDefault();
 
+  let userId = getMyReadingListId();
+  console.log("userId " + userId);
+  if (!userId) {
+    console.log("userId " + userId);
+    return
+  };
+
   //validate entry
   if (!validate($('#item_name').val().trim())) {
     return;
   }
 
+
+
   let obj = {
     itemName: $('#item_name').val().trim(),
     itemDescription: $('#item_description').val().trim(),
-    is_complete: false
+    is_complete: false,
+    UserId: userId
   }
+
+  console.log("obj.UserId "+obj.UserId);
 
   $.post('/api/new', obj, function (data) {
   }).then(function () {
