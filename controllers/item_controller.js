@@ -8,7 +8,7 @@ var router = express.Router();
 
 //ROUTES
 //GET all rows from db
-router.get("/:username?/:email?", function (req, res) {
+router.get("/:username?/:email?/:id?", function (req, res) {
 
   //don't show list unless username and password supplied
   if ((typeof req.query.username === 'undefined') || (typeof req.query.email === 'undefined')) {
@@ -16,8 +16,14 @@ router.get("/:username?/:email?", function (req, res) {
     return;
   };
 
+  let userId = req.query.id;
 
-  db.Item.findAll().then(function (data) {
+  db.Item.findAll({
+      where: {
+        UserId: userId
+      },
+      include: [{ all: true, nested: true }]
+    }).then(function (data) {
 
     let items = {
       item: data

@@ -6,7 +6,6 @@ function getMyReadingListId() {
   return window.localStorage.getItem("myReadingListId");
 }
 
-
 // if nothing in either list, display message
 function checkSectionContents() {
 
@@ -62,16 +61,12 @@ $(document).on('click', '#add', function () {
     return;
   }
 
-
-
   let obj = {
     itemName: $('#item_name').val().trim(),
     itemDescription: $('#item_description').val().trim(),
     is_complete: false,
     UserId: userId
   }
-
-  console.log("obj.UserId "+obj.UserId);
 
   $.post('/api/new', obj, function (data) {
   }).then(function () {

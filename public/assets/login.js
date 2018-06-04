@@ -11,6 +11,11 @@ $('#login').on('click', function(){
     localStorage.setItem("myReadingListEmail",user.email);  
     //get id to client so can join with user's additions
     localStorage.setItem("myReadingListId",response.id);
+
+    //must be a better way to do this...
+    let redir = window.location.href + `?username=${user.username}&email=${user.email}&id=${response.id}`;
+    window.location.assign(redir);
+
   });
 
 });
