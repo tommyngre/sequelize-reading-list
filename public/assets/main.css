@@ -24,6 +24,7 @@ h1{
 
 .has-tooltip{
   position: relative;
+  margin-bottom:0px;
 }
 
 .has-tooltip .tooltip-text{

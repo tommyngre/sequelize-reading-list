@@ -11,10 +11,6 @@ module.exports = function (sequelize, Datatypes) {
     description: {
       type: Datatypes.STRING,
       allowNull: true,
-      validate: {
-        len:
-          [1, 250]
-      }
     },
     is_complete: {
       type: Datatypes.BOOLEAN,
