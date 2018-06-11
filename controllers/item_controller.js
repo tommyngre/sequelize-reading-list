@@ -36,16 +36,14 @@ router.get("/:username?/:email?/:id?", function (req, res) {
       nameAry.forEach(name => {
         console.log(name.substring(0, 3));
         if (name.substring(0, 3) === 'www' || name.substring(0, 3) === 'htt') {
-          newName += `<a href="${name}">link</a>`;
+          newName = newName + "<a href='" + name + "'>{link}</a> ";
           console.log(newName);
         } else {
-          newName += name;
+          newName = newName + name + " ";
         }
       });
       item.dataValues.new_display_name = newName;
     });
-
-    console.log(data);
 
     let items = {
       item: data
