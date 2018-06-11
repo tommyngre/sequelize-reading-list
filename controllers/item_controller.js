@@ -35,9 +35,11 @@ router.get("/:username?/:email?/:id?", function (req, res) {
       let newName = '';
       nameAry.forEach(name => {
         console.log(name.substring(0, 3));
-        if (name.substring(0, 3) === 'www' || name.substring(0, 3) === 'htt') {
+        if (name.substring(0, 3) === 'htt') {
           newName = newName + "<a href='" + name + "'>{link}</a> ";
-          console.log(newName);
+        }
+        else if (name.substring(0, 3) === 'www') {
+          newName = newName + "<a href='http://" + name + "'>{link}</a> ";
         } else {
           newName = newName + name + " ";
         }
