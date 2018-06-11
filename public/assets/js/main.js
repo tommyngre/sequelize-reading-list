@@ -1,5 +1,5 @@
 // get user id from localStorage
-function getMyReadingListId() {
+function hasCachedUserId() {
   if (window.localStorage.getItem("myReadingListId") === null) {
     return false;
   }
@@ -34,12 +34,12 @@ function validate(entry) {
   //enforce non null
   if (entry == "") {
     isValid = false;
-    showErr("Enter something, dude :P")
+    showErr("Enter a title :P")
   }
   //enforce len
   if (entry.length > 250) {
     isValid = false;
-    showErr("255 character max, dude :P")
+    showErr("Too many characters. Enter fewer than 255")
   }
   return isValid;
 }
@@ -49,12 +49,12 @@ function validate(entry) {
 $(document).on('click', '#add', function () {
   event.preventDefault();
 
-  let userId = getMyReadingListId();
-  console.log("userId " + userId);
-  if (!userId) {
-    console.log("userId " + userId);
-    return
-  };
+  if (!hasCachedUserId()) {
+    window.location.assign('/login');
+    return;
+  } else {
+    userId = hasCachedUserId;
+  }
 
   //validate entry
   if (!validate($('#item_name').val().trim())) {

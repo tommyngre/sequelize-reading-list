@@ -8,22 +8,44 @@ var router = express.Router();
 
 //ROUTES
 //GET all rows from db
+router.get("/login", function (req, res) {
+  res.render('login');
+})
+
 router.get("/:username?/:email?/:id?", function (req, res) {
 
   //don't show list unless username and password supplied
   if ((typeof req.query.username === 'undefined') || (typeof req.query.email === 'undefined')) {
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    // res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.redirect('/login');
     return;
   };
 
   let userId = req.query.id;
 
   db.Item.findAll({
-      where: {
-        UserId: userId
-      },
-      include: [{ all: true, nested: true }]
-    }).then(function (data) {
+    where: {
+      UserId: userId
+    },
+    include: [{ all: true, nested: true }]
+  }).then(function (data) {
+
+    data.forEach(item => {
+      let nameAry = item.display_name.split(' ');
+      let newName = '';
+      nameAry.forEach(name => {
+        console.log(name.substring(0, 3));
+        if (name.substring(0, 3) === 'www' || name.substring(0, 3) === 'htt') {
+          newName += `<a href="${name}">link</a>`;
+          console.log(newName);
+        } else {
+          newName += name;
+        }
+      });
+      item.dataValues.new_display_name = newName;
+    });
+
+    console.log(data);
 
     let items = {
       item: data
@@ -31,6 +53,7 @@ router.get("/:username?/:email?/:id?", function (req, res) {
 
     res.render("index", items);
   });
+
 
 });
 
@@ -63,7 +86,7 @@ router.post("/api/new", function (req, res) {
 //POST login
 router.post("/api/login", function (req, res) {
 
-  console.log("req.body "+req.body);
+  console.log("req.body " + req.body);
 
   db.User.findOrCreate({
     where: {
@@ -71,7 +94,7 @@ router.post("/api/login", function (req, res) {
       email: req.body.email
     }
   }).then(function (result) {
-    return res.json({ 
+    return res.json({
       id: result[0].dataValues.id,
       username: result[0].dataValues.username,
       email: result[0].dataValues.email,

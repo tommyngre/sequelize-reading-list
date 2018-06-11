@@ -2,8 +2,7 @@
 <li>
 	<div class="large-12 cell">
 		<h3 class="has-tooltip"><span class="tooltip-text">{{dataValues.display_name}}</span>
-			{{#if url}}<i class="fas fa-link"></i> <a href="{{url}}">{{dataValues.display_name}}</a>
-			{{else}}<i class="fas fa-book"></i> {{dataValues.display_name}}{{/if}}</h3>
+			<i class="fas fa-book"></i>{{dataValues.new_display_name}}</h3>
 		<h5 class="item-description">{{dataValues.description}}</h5>
 	</div>
 	<button class="button toggle-isComplete" data-id="{{dataValues.id}}" data-iscomplete="{{dataValues.is_complete}}">
