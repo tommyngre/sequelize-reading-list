@@ -27,4 +27,7 @@ On the list page, users must enter a title, but they need not enter a descriptio
 
 For both title and description fields, I try to check for urls, because urls (especially longs), will not be very pretty if rendered in full.
 
-Before the values are rendered, I `split(' ')` the value of each field into an array, and then check whether `substring.(0,3) === 'www'` or `substring.(0,3) === 'http'`. If so, I format it into a url which ultimately renders like this `{link}`
+Before values from the database are rendered...
+1. I `split(' ')` the value of each field into an array
+2. Check `substring.(0,3)` for each element
+3. If the substring is  `'www'` or `'http'`, I format it into a url renders like this: `{link}`
