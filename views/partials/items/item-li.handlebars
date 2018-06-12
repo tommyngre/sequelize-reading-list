@@ -3,7 +3,7 @@
 	<div class="large-12 cell">
 		<h3 class="has-tooltip"><span class="tooltip-text">{{dataValues.display_name}}</span>
 			<i class="fas fa-book"></i> {{{dataValues.new_display_name}}}</h3>
-		<h5 class="item-description">{{dataValues.description}}</h5>
+		<h5 class="item-description">{{{dataValues.new_description}}}</h5>
 	</div>
 	<button class="button toggle-isComplete" data-id="{{dataValues.id}}" data-iscomplete="{{dataValues.is_complete}}">
 		{{#if dataValues.is_complete}}add back to list{{else}}mark completed{{/if}}

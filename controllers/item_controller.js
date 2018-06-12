@@ -30,11 +30,14 @@ router.get("/:username?/:email?/:id?", function (req, res) {
     include: [{ all: true, nested: true }]
   }).then(function (data) {
 
+    //special handling for rendering URLs
     data.forEach(item => {
       let nameAry = item.display_name.split(' ');
       let newName = '';
+      let descAry = item.description.split(' ');
+      let newDesc = '';
+
       nameAry.forEach(name => {
-        console.log(name.substring(0, 3));
         if (name.substring(0, 3) === 'htt') {
           newName = newName + "<a href='" + name + "'>{link}</a> ";
         }
@@ -45,6 +48,18 @@ router.get("/:username?/:email?/:id?", function (req, res) {
         }
       });
       item.dataValues.new_display_name = newName;
+
+     descAry.forEach(desc => {
+        if (desc.substring(0, 3) === 'htt') {
+          newDesc = newDesc + "<a href='" + desc + "'>{link}</a> ";
+        }
+        else if (desc.substring(0, 3) === 'www') {
+          newDesc = newDesc + "<a href='http://" + desc + "'>{link}</a> ";
+        } else {
+          newDesc = newDesc + desc + " ";
+        }
+      });
+      item.dataValues.new_description = newDesc;
     });
 
     let items = {
