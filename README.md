@@ -2,7 +2,7 @@
 "My Reading List" is branded as a bookmarking app geared toward readers, but it theoretically could function as any type of "todo" or "wishlist" app. Users add items to a "Reading List," then can either move them to a "Recent Reads" list or delete them from the page.
 
 ## implementation
-My Reading List essentially is a one page app built with `node` `express` and `express-handlebars`, which has routes to perform CRUD (create, read, update, delete) functions on a MySQL database. On the frontend, it minimally leverages `Foundation.css` (mainly, its grid and button classes).
+My Reading List essentially is a one page app built with `node`, `mysql`, `sequelize`, `express` and `express-handlebars`, which has routes to perform CRUD (create, read, update, delete) functions on a MySQL database. On the frontend, it minimally leverages `Foundation.css` (mainly, its grid and button classes).
 
 See it hosted on Heroku, connected to a JAWs db, [here](https://agile-stream-68346.herokuapp.com/).
 
